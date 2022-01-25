@@ -1,0 +1,37 @@
+<page-meta page-style="{{ showShare ? 'overflow: hidden;' : '' }}">
+    <!-- 轮播图区域 -->
+    <view class="bannerWrap">   
+		<swiper class='bannerSwiper' previous-margin="54rpx" next-margin='54rpx' indicator-dots="{{indicatorDots}}" indicator-color='#B5B5B5' indicator-active-color='#fff' interval='3000' duration='500' bindchange='onChange' circular='true'>
+			<block wx:for="{{imagesList}}" wx:key="index" class="imgBox">
+				<swiper-item class="imgBox">
+					<image class="{{index==xindex?'imageBanner':'imageBanner_small'}}" src="{{item}}" id='{{item}}'>
+					</image>
+					<view class="redBox">
+						<view class="left">
+							<image src="{{poster_qrcode}}" alt="" />
+						</view>
+						<view class="right">
+							<view>长按图片识别二维码</view>
+							<view class="des">立即加入</view>
+						</view>
+					</view>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+    <!-- 触发事件按钮 分享海报 -->
+    <view class="button mt16">
+		<van-button type="danger" class="w343 mc fs16" block round :disabled="!poster_qrcode" bind:click="invite">立即邀请
+		</van-button>
+	</view>
+    <!-- vant分享组件 -->
+    <van-share-sheet show="{{ showShare }}" options="{{ options }}" bind:select="onSelect" bind:close="onClose" />
+    <!-- canvas区域；需要时显示，其实显示在可视区外，如直接隐藏则canvas获取失败 js报错 -->
+    <canvas style="width: 200px; height: 200px;margin-top: 100%" canvas-id="myQrcode"></canvas>
+    <view class="{{showCanvas ? '' : 'hide'}} ">
+        <view class="canvas_container">
+            <canvas type="2d" id="canvasPoster" style="width: {{width}}px; height: {{height}}px;margin-top: 10%;margin-left: {{(screenWidth - (width/2))/2}}px;display: block;background-color:#eeeeee';"></canvas>
+        </view>
+	</view>
+</page-meta>
+  
