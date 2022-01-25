@@ -1,7 +1,7 @@
 /*
  * @Author: lee
  * @Date: 2022-01-25 10:14:55
- * @LastEditTime: 2022-01-25 10:43:40
+ * @LastEditTime: 2022-01-25 13:30:54
  */
 // 二维码库
 import drawQrcode from "weapp-qrcode"
@@ -11,11 +11,13 @@ Page({
         // 屏幕宽
         screenWidth: 0,
         // canvas画布
+        canvas: null,
         width: 0,
         height: 0,
+        // canvas可见与否
+        showCanvas: '',
         // 保存到本地分享按钮 && 阻止屏幕滚动
         showShare: false,
-        canvas: null,
         options: [
             { name: '下载本地', icon: '/images/download.png', },
         ],
@@ -34,8 +36,6 @@ Page({
         },
         // 分享二维码
         poster_qrcode: '',
-        // canvas可见与否
-        showCanvas: ''
     },
 
     /**
